@@ -31,17 +31,15 @@ public class Animal {
 
     private String name;
 
-    private String type;
-
     private String gender;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "date_of_entry")
     private Date dateOfEntry; 
 
-    // Many to one - relación con Family
     @ManyToOne
-    @JoinColumn(name = "family_id", nullable = false)
-    private Family family;
+    @JoinColumn(name = "type_id", nullable = false)
+    private Type type;
+
     
 }

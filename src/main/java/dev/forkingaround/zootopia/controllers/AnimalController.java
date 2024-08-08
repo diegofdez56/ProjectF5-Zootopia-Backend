@@ -39,7 +39,7 @@ public class AnimalController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdAnimal);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("update/{id}")
     public ResponseEntity<Animal> updateAnimal(@PathVariable Long id, @RequestBody Animal updatedAnimal) throws Exception {
         if (!animalRepository.existsById(id)) {
             throw new Exception("Animal not found with ID " + id);
@@ -49,7 +49,7 @@ public class AnimalController {
         return ResponseEntity.ok(animal);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public ResponseEntity<Void> deleteAnimal(@PathVariable Long id) throws Exception {
         if (!animalRepository.existsById(id)) {
             throw new Exception("Animal not found with ID " + id);
