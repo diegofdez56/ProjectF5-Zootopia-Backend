@@ -3,11 +3,11 @@ package dev.forkingaround.zootopia.services;
 import java.util.HashSet;
 import java.util.Set;
 
+import dev.forkingaround.zootopia.facades.EncoderFacade;
 import dev.forkingaround.zootopia.dtos.UserDto;
 import dev.forkingaround.zootopia.models.Role;
 import dev.forkingaround.zootopia.models.User;
 import dev.forkingaround.zootopia.repositories.UserRepository;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,16 +15,18 @@ public class RegisterService {
 
     UserRepository repository;
     RoleService roleService;
+    EncoderFacade encoderFacade;
 
-    public RegisterService(UserRepository repository, RoleService roleService) {
+    public RegisterService(UserRepository repository, RoleService roleService, EncoderFacade encoderFacade) {
         this.repository = repository;
         this.roleService = roleService;
+        this.encoderFacade = encoderFacade;
     }
 
     public String save(UserDto newUserDto) {
 
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String passwordEncoded = encoder.encode(newUserDto.getPassword());
+        String passwordDecoded = encoderFacade.decode("base64", newUserDto.getPassword());
+        String passwordEncoded = encoderFacade.encode("bcrypt",  passwordDecoded);
 
         User user = new User(newUserDto.getUsername(), passwordEncoded);
         user.setRoles(assignDefaultRole());
