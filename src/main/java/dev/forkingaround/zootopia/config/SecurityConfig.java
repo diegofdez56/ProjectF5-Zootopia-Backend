@@ -3,7 +3,9 @@ package dev.forkingaround.zootopia.config;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 import java.util.Arrays;
+
 import dev.forkingaround.zootopia.services.JpaUserDetailsService;
+import dev.forkingaround.zootopia.facades.encryptations.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -73,6 +75,11 @@ public class SecurityConfig {
         @Bean
         PasswordEncoder passwordEncoder() {
                 return new BCryptPasswordEncoder();
+        }
+
+        @Bean
+        Base64Encoder base64Encoder() {
+                return new Base64Encoder();
         }
 
         /* @Bean
