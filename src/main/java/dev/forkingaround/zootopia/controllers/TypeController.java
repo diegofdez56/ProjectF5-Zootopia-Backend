@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/types")
+@RequestMapping("${api-endpoint}/types")
 public class TypeController {
 
     @Autowired

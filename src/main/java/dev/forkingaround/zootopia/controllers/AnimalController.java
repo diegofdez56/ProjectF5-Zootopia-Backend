@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/animals")
+@RequestMapping("${api-endpoint}/animals")
+@CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*")
 public class AnimalController {
 
     @Autowired
