@@ -32,3 +32,9 @@ INSERT INTO animals (name, type_id, gender, date_of_entry) VALUES
 ('Whiskers', (SELECT id FROM types WHERE name = 'Weasel'), 'Male', '2023-01-05'),
 ('Thumper', (SELECT id FROM types WHERE name = 'Rabbit'), 'Male', '2022-10-29'),
 ('Bambi', (SELECT id FROM types WHERE name = 'Hare'), 'Female', '2023-06-12');
+
+
+-- login
+INSERT INTO roles (id_role, name) VALUES (default, 'ROLE_ADMIN');
+INSERT INTO users (id_user, username, password) VALUES (default, 'admin', '$2a$12$zMUgGcYGCb2c/vwT9s12Q.380ORJIP0NgN9NmgX6pyEf.bm6fHTiK');
+INSERT INTO roles_users (role_id, user_id) VALUES (1, 1);

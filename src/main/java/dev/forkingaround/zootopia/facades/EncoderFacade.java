@@ -30,10 +30,8 @@ public class EncoderFacade implements IEncryptFacade {
     public String decode(String type, String data) {
         String dataDecoded = "";
 
-        if (type == "base64")
-            dataDecoded = new Base64Encoder().decode(data);
+        if (type == "base64") dataDecoded = base64Encoder.decode(data);
 
         return dataDecoded;
     }
-
 }

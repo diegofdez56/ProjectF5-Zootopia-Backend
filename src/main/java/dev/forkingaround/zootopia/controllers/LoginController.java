@@ -1,18 +1,22 @@
-// package dev.forkingaround.zootopia.controllers;
+package dev.forkingaround.zootopia.controllers;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.stereotype.Controller;
-// import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-// import dev.forkingaround.zootopia.repositories.LoginRepository;
+@RestController
+@RequestMapping("/api/v1/login")
+public class LoginController {
+    public String login() {
+        return "Login success";
+    }
 
-// @Controller
-// public class LoginController {
-//     @Autowired
-//     private LoginRepository loginRepository;
+    @PostMapping("/api/v1/logout")
+    public String logout() {
+        return "Logout success";
 
-//     @GetMapping("")
-//     public String viewHomePage() {
-//         return "index";
-//     }
-// }
+    }
+}

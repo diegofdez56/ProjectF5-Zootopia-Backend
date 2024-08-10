@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import dev.forkingaround.zootopia.facades.EncoderFacade;
+import dev.forkingaround.zootopia.implementations.IEncryptFacade;
 import dev.forkingaround.zootopia.dtos.UserDto;
 import dev.forkingaround.zootopia.models.Role;
 import dev.forkingaround.zootopia.models.User;
@@ -15,7 +16,7 @@ public class RegisterService {
 
     UserRepository repository;
     RoleService roleService;
-    EncoderFacade encoderFacade;
+    IEncryptFacade encoderFacade;
 
     public RegisterService(UserRepository repository, RoleService roleService, EncoderFacade encoderFacade) {
         this.repository = repository;
