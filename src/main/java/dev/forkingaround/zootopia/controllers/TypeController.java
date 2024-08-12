@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/types")
+@RequestMapping("${api-endpoint}/types")
 public class TypeController {
 
     @Autowired
@@ -39,7 +39,7 @@ public class TypeController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdType);
     }
 
-    @PutMapping("update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Type> updateType(@PathVariable Long id, @RequestBody Type updatedType) throws Exception {
         if (!typeRepository.existsById(id)) {
             throw new Exception("Type not found with ID " + id);
@@ -49,7 +49,7 @@ public class TypeController {
         return ResponseEntity.ok(type);
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteType(@PathVariable Long id) throws Exception {
         if (!typeRepository.existsById(id)) {
             throw new Exception("Type not found with ID " + id);

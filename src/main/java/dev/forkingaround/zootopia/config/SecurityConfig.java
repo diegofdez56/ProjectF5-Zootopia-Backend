@@ -1,20 +1,27 @@
 package dev.forkingaround.zootopia.config;
 
-import static org.springframework.security.config.Customizer.withDefaults;
 
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 
 import dev.forkingaround.zootopia.services.JpaUserDetailsService;
 import dev.forkingaround.zootopia.facades.encryptations.*;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
@@ -38,23 +45,32 @@ public class SecurityConfig {
         public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
                 http
-                        .cors(withDefaults())
-                        .csrf(csrf -> csrf.disable())
-                        .formLogin(form -> form.disable())
-                        .logout(out -> out
-                                .logoutUrl(endpoint + "/logout")
-                                .deleteCookies("JSESSIONID"))
-                        .authorizeHttpRequests(auth -> auth
-                                .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
-                                .requestMatchers( HttpMethod.POST, endpoint + "/register").permitAll()
-                                .requestMatchers(HttpMethod.GET, endpoint + "/login").hasAnyRole("USER","ADMIN")
-                                .requestMatchers(HttpMethod.GET, endpoint + "/countries").hasAnyRole("USER", "ADMIN")
-                                .requestMatchers(HttpMethod.POST, endpoint + "/countries").hasRole("ADMIN")
-                                .anyRequest().authenticated())
-                        .userDetailsService(jpaUserDetailsService)
-                        .httpBasic(withDefaults())
-                        .sessionManagement(session -> session
-                                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED));
+                                .cors(Customizer.withDefaults())
+                                .csrf(csrf -> csrf.disable())
+                                .formLogin(form -> form.disable())
+                                .logout(out -> out
+                                                .logoutUrl(endpoint + "/logout")
+                                                .deleteCookies("JSESSIONID"))
+                                .authorizeHttpRequests(auth -> auth
+                                                .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**"))
+                                                .permitAll()
+                                                .requestMatchers("/api/v1/login").hasRole("ADMIN")
+                                                .requestMatchers(HttpMethod.POST, endpoint + "/register").permitAll()
+                                                .requestMatchers(HttpMethod.GET, endpoint + "/login")
+                                                .hasAnyRole("USER", "ADMIN")
+
+                                                .requestMatchers(HttpMethod.GET, endpoint + "/animals/all").permitAll()
+                                                .requestMatchers(HttpMethod.POST, endpoint + "/animals/add")
+                                                .hasRole("ADMIN")
+                                                .requestMatchers(HttpMethod.PUT, endpoint + "/animals/update/{id}")
+                                                .hasRole("ADMIN")
+                                                .requestMatchers(HttpMethod.DELETE, endpoint + "/animals/delete/{id}")
+                                                .hasRole("ADMIN")
+                                                .anyRequest().authenticated())
+                                .userDetailsService(jpaUserDetailsService)
+                                .httpBasic(Customizer.withDefaults())
+                                .sessionManagement(session -> session
+                                                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED));
 
                 http.headers(header -> header.frameOptions(frame -> frame.sameOrigin()));
 
@@ -62,10 +78,11 @@ public class SecurityConfig {
         }
 
         @Bean
-        CorsConfigurationSource corsConfiguration() {
+        public CorsConfigurationSource corsConfigurationSource() {
                 CorsConfiguration configuration = new CorsConfiguration();
                 configuration.setAllowCredentials(true);
                 configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
+
                 configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
                 UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
                 source.registerCorsConfiguration("/**", configuration);
@@ -82,26 +99,17 @@ public class SecurityConfig {
                 return new Base64Encoder();
         }
 
-        /* @Bean
+        @Bean
         public InMemoryUserDetailsManager userDetailsManager() {
 
-                UserDetails mickey = User.builder()
-                                .username("mickey")
-                                .password("{bcrypt}$2a$12$8LegtLQWe717tIPvZeivjuqKnaAs5.bm0Q05.5GrAmcKzXw2NjoUO") // password
-                                .roles("USER")
-                                .build();
+                UserDetails admin = User.builder()
+                                .username("admin")
+                                .password("{bcrypt}$2a$12$zMUgGcYGCb2c/vwT9s12Q.380ORJIP0NgN9NmgX6pyEf.bm6fHTiK") // 1234
 
-                UserDetails minnie = User.builder()
-                                .username("minnie")
-                                .password("{bcrypt}$2a$12$8LegtLQWe717tIPvZeivjuqKnaAs5.bm0Q05.5GrAmcKzXw2NjoUO") // password
                                 .roles("ADMIN")
                                 .build();
 
-                Collection<UserDetails> users = new ArrayList<>();
-                users.add(mickey);
-                users.add(minnie);
-
-                return new InMemoryUserDetailsManager(users);
-        } */
+                return new InMemoryUserDetailsManager(admin);
+        }
 
 }

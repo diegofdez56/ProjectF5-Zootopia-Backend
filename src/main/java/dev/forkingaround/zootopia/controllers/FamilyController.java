@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/families")
+@RequestMapping("${api-endpoint}/families")
 public class FamilyController {
 
     @Autowired
@@ -39,7 +39,7 @@ public class FamilyController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdFamily);
     }
 
-    @PutMapping("update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Family> updateFamily(@PathVariable Long id, @RequestBody Family updatedFamily) throws Exception {
         if (!familyRepository.existsById(id)) {
             throw new Exception("Family not found with ID " + id);
@@ -49,7 +49,7 @@ public class FamilyController {
         return ResponseEntity.ok(family);
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteFamily(@PathVariable Long id) throws Exception {
         if (!familyRepository.existsById(id)) {
             throw new Exception("Family not found with ID " + id);
