@@ -1,10 +1,8 @@
 package dev.forkingaround.zootopia.config;
 
-
-
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
+// import java.util.Collection;
 
 import dev.forkingaround.zootopia.services.JpaUserDetailsService;
 import dev.forkingaround.zootopia.facades.encryptations.*;
@@ -82,8 +80,12 @@ public class SecurityConfig {
                 CorsConfiguration configuration = new CorsConfiguration();
                 configuration.setAllowCredentials(true);
                 configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
+                configuration.addAllowedMethod("*"); 
+                configuration.addAllowedHeader("*"); 
+                configuration.addExposedHeader("Authorization");
 
-                configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+                // configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT",
+                // "DELETE"));
                 UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
                 source.registerCorsConfiguration("/**", configuration);
                 return source;
