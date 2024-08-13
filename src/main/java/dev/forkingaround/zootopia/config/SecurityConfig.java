@@ -1,8 +1,6 @@
 package dev.forkingaround.zootopia.config;
 
-// import java.util.ArrayList;
 import java.util.Arrays;
-// import java.util.Collection;
 
 import dev.forkingaround.zootopia.services.JpaUserDetailsService;
 import dev.forkingaround.zootopia.facades.encryptations.*;
@@ -26,7 +24,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-@SuppressWarnings("unused")
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -81,8 +78,8 @@ public class SecurityConfig {
                 CorsConfiguration configuration = new CorsConfiguration();
                 configuration.setAllowCredentials(true);
                 configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
-                configuration.addAllowedMethod("*"); 
-                configuration.addAllowedHeader("*"); 
+                configuration.addAllowedMethod("*");
+                configuration.addAllowedHeader("*");
                 configuration.addExposedHeader("Authorization");
 
                 // configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT",

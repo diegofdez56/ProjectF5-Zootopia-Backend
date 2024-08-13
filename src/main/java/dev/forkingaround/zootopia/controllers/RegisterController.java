@@ -1,6 +1,5 @@
 package dev.forkingaround.zootopia.controllers;
 
-
 import dev.forkingaround.zootopia.dtos.UserDto;
 import dev.forkingaround.zootopia.services.RegisterService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +23,4 @@ public class RegisterController {
         return service.save(newUser);
     }
 
-} 
-    
-
+}

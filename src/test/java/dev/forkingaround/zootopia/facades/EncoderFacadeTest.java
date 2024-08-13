@@ -24,7 +24,7 @@ public class EncoderFacadeTest {
     @BeforeEach
     void setUp() {
         // passwordEncoder = new BCryptPasswordEncoder();
-        //facade = new EncoderFacade(passwordEncoder, null);
+        // facade = new EncoderFacade(passwordEncoder, null);
     }
 
     // @Disabled

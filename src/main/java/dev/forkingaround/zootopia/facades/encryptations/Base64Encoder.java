@@ -17,5 +17,5 @@ public class Base64Encoder implements IEncoder {
         String dataDecoded = new String(decodedBytes);
         return dataDecoded;
     }
-    
+
 }
