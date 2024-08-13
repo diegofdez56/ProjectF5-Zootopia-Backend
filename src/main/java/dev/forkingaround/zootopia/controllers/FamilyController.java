@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("${api-endpoint}/families")
+@RequestMapping("${api-endpoint}/animals/families")
 public class FamilyController {
 
     @Autowired

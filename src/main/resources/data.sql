@@ -34,6 +34,19 @@ INSERT INTO animals (name, type_id, gender, date_of_entry) VALUES
 ('Thumper', (SELECT id FROM types WHERE name = 'Rabbit'), 'Male', '2022-10-29'),
 ('Bambi', (SELECT id FROM types WHERE name = 'Hare'), 'Female', '2023-06-12'),
 ('Bamba', (SELECT id FROM types WHERE name = 'Hare'), 'Female', '2023-06-12'),
+('Bamboo', (SELECT id FROM types WHERE name = 'Hare'), 'Female', '2023-06-12'),
+('Simba', (SELECT id FROM types WHERE name = 'Lion'), 'Male', '2022-01-15'),
+('Nala', (SELECT id FROM types WHERE name = 'Lion'), 'Female', '2022-03-10'),
+('Shere Khan', (SELECT id FROM types WHERE name = 'Tiger'), 'Male', '2021-07-25'),
+('Akela', (SELECT id FROM types WHERE name = 'Wolf'), 'Male', '2020-12-05'),
+('Vixen', (SELECT id FROM types WHERE name = 'Fox'), 'Female', '2021-09-19'),
+('Nagini', (SELECT id FROM types WHERE name = 'Snake'), 'Female', '2019-05-14'),
+('Crocky', (SELECT id FROM types WHERE name = 'Crocodile'), 'Male', '2018-04-22'),
+('Pippin', (SELECT id FROM types WHERE name = 'Otter'), 'Female', '2023-02-17'),
+('Whiskers', (SELECT id FROM types WHERE name = 'Weasel'), 'Male', '2023-01-05'),
+('Thumper', (SELECT id FROM types WHERE name = 'Rabbit'), 'Male', '2022-10-29'),
+('Bambi', (SELECT id FROM types WHERE name = 'Hare'), 'Female', '2023-06-12'),
+('Bamba', (SELECT id FROM types WHERE name = 'Hare'), 'Female', '2023-06-12'),
 ('Bamboo', (SELECT id FROM types WHERE name = 'Hare'), 'Female', '2023-06-12');
 
 -- Inserción de datos en las tablas `roles` y `users`
