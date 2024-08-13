@@ -34,6 +34,7 @@ public class AnimalControllerTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    @SuppressWarnings("null")
     @Test
     void testGetAllAnimals() {
 

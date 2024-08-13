@@ -17,8 +17,10 @@ import lombok.Data;
 @Entity
 @Table(name = "roles")
 public class Role {
-    
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id_role")
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_role")
     private Long id;
     private String name;
 

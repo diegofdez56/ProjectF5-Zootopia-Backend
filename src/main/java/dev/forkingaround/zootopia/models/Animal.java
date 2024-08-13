@@ -35,11 +35,10 @@ public class Animal {
 
     @Temporal(TemporalType.DATE)
     @Column(name = "date_of_entry")
-    private Date dateOfEntry; 
+    private Date dateOfEntry;
 
     @ManyToOne
     @JoinColumn(name = "type_id", nullable = false)
     private Type type;
 
-    
 }

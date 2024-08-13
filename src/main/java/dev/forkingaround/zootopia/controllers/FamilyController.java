@@ -40,7 +40,8 @@ public class FamilyController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Family> updateFamily(@PathVariable Long id, @RequestBody Family updatedFamily) throws Exception {
+    public ResponseEntity<Family> updateFamily(@PathVariable Long id, @RequestBody Family updatedFamily)
+            throws Exception {
         if (!familyRepository.existsById(id)) {
             throw new Exception("Family not found with ID " + id);
         }
@@ -58,4 +59,3 @@ public class FamilyController {
         return ResponseEntity.noContent().build();
     }
 }
-
