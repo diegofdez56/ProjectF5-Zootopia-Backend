@@ -43,17 +43,19 @@ public class SecurityConfig {
                 http
                                 .cors(Customizer.withDefaults())
                                 .csrf(csrf -> csrf.disable())
-                                .formLogin(form -> form.disable())
+                                .formLogin(form -> form
+                                                .loginPage(endpoint + "/login")
+                                                .defaultSuccessUrl("/dashboard", true)
+                                                .permitAll())
                                 .logout(out -> out
                                                 .logoutUrl(endpoint + "/logout")
                                                 .deleteCookies("JSESSIONID"))
                                 .authorizeHttpRequests(auth -> auth
                                                 .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**"))
                                                 .permitAll()
-                                                .requestMatchers("/api/v1/login").hasRole("ADMIN")
+                                                .requestMatchers("/api/v1/login").permitAll()
                                                 .requestMatchers(HttpMethod.POST, endpoint + "/register").permitAll()
-                                                .requestMatchers(HttpMethod.GET, endpoint + "/login")
-                                                .hasAnyRole("USER", "ADMIN")
+                                                .requestMatchers(HttpMethod.GET, endpoint + "/login").hasAnyRole("USER", "ADMIN")
 
                                                 .requestMatchers(HttpMethod.GET, endpoint + "/animals/all").permitAll()
                                                 .requestMatchers(HttpMethod.POST, endpoint + "/animals/add")
