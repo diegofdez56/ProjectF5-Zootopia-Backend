@@ -38,7 +38,7 @@ public class Animal {
     private Date dateOfEntry;
 
     @ManyToOne
-    @JoinColumn(name = "type_id", nullable = false)
+    @JoinColumn(name = "type_id", nullable = false)  // Asegúrate de que esta columna no acepte valores nulos
     private Type type;
 
 }
