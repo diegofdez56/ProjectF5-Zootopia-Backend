@@ -1,7 +1,6 @@
 package dev.forkingaround.zootopia.dtos;
 
 import java.util.Date;
-
 import lombok.Data;
 
 @Data
@@ -11,3 +10,4 @@ public class AnimalRequest {
     private String gender;
     private Date dateOfEntry;
 }
+

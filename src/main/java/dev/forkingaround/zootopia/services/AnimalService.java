@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 
-
 @Service
 public class AnimalService {
 
@@ -33,27 +32,24 @@ public class AnimalService {
     }
 
     @Transactional
-public Animal createAnimal(AnimalRequest request) {
-    Type type = typeRepository.findByName(request.getTypeName());
-    if (type == null) {
-        throw new IllegalArgumentException("Type not found");
+    public Animal createAnimal(AnimalRequest request) {
+        Type type = typeRepository.findByName(request.getTypeName())
+            .orElseThrow(() -> new IllegalArgumentException("Type not found"));
+
+        Animal animal = Animal.builder()
+            .name(request.getName())
+            .type(type)
+            .gender(request.getGender())
+            .dateOfEntry(request.getDateOfEntry())
+            .build();
+
+        return animalRepository.save(animal);
     }
 
-    Animal animal = Animal.builder()
-        .name(request.getName())
-        .type(type)
-        .gender(request.getGender())
-        .dateOfEntry(request.getDateOfEntry())
-        .build();
-
-    return animalRepository.save(animal);
-}
     @Transactional
     public void updateAnimal(Long id, AnimalRequest request) {
-        Type type = typeRepository.findByName(request.getTypeName());
-        if (type == null) {
-            throw new IllegalArgumentException("Type not found");
-        }
+        Type type = typeRepository.findByName(request.getTypeName())
+            .orElseThrow(() -> new IllegalArgumentException("Type not found"));
 
         Animal animal = animalRepository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("Animal not found"));
