@@ -33,35 +33,38 @@ public class AnimalController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Animal> createAnimal(@RequestBody AnimalRequest animalRequest) {
+    public ResponseEntity<String> createAnimal(@RequestBody AnimalRequest animalRequest) {
         try {
             Animal createdAnimal = animalService.createAnimal(animalRequest);
-            return ResponseEntity.status(HttpStatus.CREATED).body(createdAnimal);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Animal created with ID: " + createdAnimal.getId());
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid data: " + e.getMessage());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(null);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred: " + e.getMessage());
         }
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> updateAnimal(@PathVariable Long id, @RequestBody AnimalRequest animalRequest) {
+    public ResponseEntity<String> updateAnimal(@PathVariable Long id, @RequestBody AnimalRequest animalRequest) {
         try {
             animalService.updateAnimal(id, animalRequest);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok("Animal updated successfully");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Animal or type not found: " + e.getMessage());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body("An error occurred while updating the animal: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while updating the animal: " + e.getMessage());
         }
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteAnimal(@PathVariable Long id) {
+    public ResponseEntity<String> deleteAnimal(@PathVariable Long id) {
         try {
             animalService.deleteAnimal(id);
             return ResponseEntity.noContent().build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Animal not found: " + e.getMessage());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body("An error occurred while deleting the animal: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while deleting the animal: " + e.getMessage());
         }
     }
 }
