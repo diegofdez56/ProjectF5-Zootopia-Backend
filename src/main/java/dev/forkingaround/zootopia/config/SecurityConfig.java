@@ -56,7 +56,7 @@ public class SecurityConfig {
                                                 .requestMatchers("/api/v1/login").permitAll()
                                                 .requestMatchers(HttpMethod.POST, endpoint + "/register").permitAll()
                                                 .requestMatchers(HttpMethod.GET, endpoint + "/login").hasAnyRole("USER", "ADMIN")
-
+                                                .requestMatchers(HttpMethod.GET, endpoint + "/dashboard").hasRole("ADMIN")
                                                 .requestMatchers(HttpMethod.GET, endpoint + "/animals/all").permitAll()
                                                 .requestMatchers(HttpMethod.POST, endpoint + "/animals/add")
                                                 .hasRole("ADMIN")
