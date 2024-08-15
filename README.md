@@ -1,4 +1,4 @@
-## Zootopia
+# Zootopia
 Software para la gestión y mantenimiento de una reserva de animales.
 
 ## Server
@@ -10,16 +10,16 @@ mvn spring-boot:run to run app
 
 ## Endpoints
 
-###Animals
-<p>GET localhost:8080/api/v1/animals/all</p>
-<p>GET localhost:8080/api/v1/animals/{id}</p>
-<p>GET localhost:8080/api/v1/animals/families</p>
-<p>POST localhost:8080/api/v1/animals/add</p>
-<p>PUT localhost:8080/api/v1/animals/update/{id}</p>
-<p>DELETE localhost:8080/api//api/v1/animals/delete/{id}</p>
+Animals
+- <p>GET localhost:8080/api/v1/animals/all</p>
+- <p>GET localhost:8080/api/v1/animals/{id}</p>
+- <p>GET localhost:8080/api/v1/animals/families</p>
+- <p>POST localhost:8080/api/v1/animals/add</p>
+- <p>PUT localhost:8080/api/v1/animals/update/{id}</p>
+- <p>DELETE localhost:8080/api//api/v1/animals/delete/{id}</p>
 
-### Login
-<p>GET localhost:8080/api/v1/login</p>
+Login
+- <p>GET localhost:8080/api/v1/login</p>
 
 
 ## Database Normalization Diagram
