@@ -2,13 +2,13 @@
 Software para la gestión y mantenimiento de una reserva de animales.
 
 ## Server
-localhost:8080
+- localhost:8080
 
-api-endpoint = /api/v1
-
-mvn spring-boot:run to run app
+- mvn spring-boot:run to run app
 
 ## Endpoints
+
+- api-endpoint = /api/v1
 
 Animals
 - <p>GET localhost:8080/api/v1/animals/all</p>
@@ -29,12 +29,10 @@ Login
 ## UML Diagram
 
 ## Tools
-Spring Boot
+- Spring Boot
 
-Mockito
+- Postman
 
-Postman
+- Docker
 
-Docker
-
-MySql Workbench
+- MySql Workbench
