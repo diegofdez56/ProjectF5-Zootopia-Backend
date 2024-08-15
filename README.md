@@ -28,6 +28,8 @@ Login
 
 ## UML Diagram
 
+![zootopia uml drawio](https://github.com/user-attachments/assets/2bdf960e-000b-485a-a891-f13a13091970)
+
 ## Tools
 - Spring Boot
 
