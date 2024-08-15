@@ -16,7 +16,7 @@ Animals
 - <p>GET localhost:8080/api/v1/animals/families</p>
 - <p>POST localhost:8080/api/v1/animals/add</p>
 - <p>PUT localhost:8080/api/v1/animals/update/{id}</p>
-- <p>DELETE localhost:8080/api//api/v1/animals/delete/{id}</p>
+- <p>DELETE localhost:8080/api/api/v1/animals/delete/{id}</p>
 
 Login
 - <p>GET localhost:8080/api/v1/login</p>
